@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gustavo.n3_poo.Repositories.StatusRepository;
 import com.gustavo.n3_poo.Repositories.VendedoresRepository;
-import com.gustavo.n3_poo.entities.Status;
-import com.gustavo.n3_poo.entities.Vendas;
 import com.gustavo.n3_poo.entities.Vendedores;
 
 @RestController

@@ -5,24 +5,41 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 import org.springframework.stereotype.Component;
 
+import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
 
 @Component
-public class ProdutosRepository {
-private Map<Long, Produtos> map = new HashMap<Long, Produtos>();
+public class ProdutosRepository {	
 	
-	public void save(Produtos obj) {
-		map.put(obj.getId(), obj);
+	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("n3poo");
+	private EntityManager em = emf.createEntityManager();
+
+	public Produtos findById(int prod_id) {
+		
+		em.getTransaction().begin();
+		Produtos get = (Produtos) em.createNativeQuery(String.format("select * from produtos where prod_id = '%d' limit 1", prod_id), Produtos.class).getResultList().stream().findFirst().orElse(null);	
+		em.getTransaction().commit();
+		
+		return get;
+		
 	}
 
-	public Produtos findById(Long id) {
-		return map.get(id);
-	}
-	
 	public List<Produtos> findAll() {
-		return new ArrayList<Produtos>(map.values());
+
+		List<Produtos> get;
+
+		em.getTransaction().begin();
+		get = (List<Produtos>) em.createNativeQuery("select * from produtos", Produtos.class).getResultList();
+		em.getTransaction().commit();
+		
+
+		return get;
 	}
 	
 }

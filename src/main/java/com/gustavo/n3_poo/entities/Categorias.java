@@ -3,6 +3,7 @@ package com.gustavo.n3_poo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,7 +17,8 @@ public class Categorias implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cat_id;
-	private String name;
+	@Column(name = "cat_nome")
+	private String cat_nome;
 	
 	public Categorias() {
 		
@@ -31,17 +33,17 @@ public class Categorias implements Serializable {
 	}
 
 	public String getName() {
-		return name;
+		return cat_nome;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.cat_nome = name;
 	}
 
 	public Categorias(int cat_id, String name) {
 		super();
 		this.cat_id = cat_id;
-		this.name = name;
+		this.cat_nome = name;
 	}
 
 	@Override

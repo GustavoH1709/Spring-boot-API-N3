@@ -3,80 +3,46 @@ package com.gustavo.n3_poo.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@javax.persistence.Entity
+@javax.persistence.Table(name = "produtos")
 public class Produtos implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private long id;
-	private String name;
-	private float price;
-	private Categorias categoria;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int prod_id;
+	private String prod_nome;
+	private String vend_cpf;
+	private int cat_id;
 	
-	public Produtos(long id, String name, float price, Categorias categoria) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.categoria = categoria;
+	public int getProd_id() {
+		return prod_id;
+	}
+	public void setProd_id(int prod_id) {
+		this.prod_id = prod_id;
+	}
+	public String getProd_nome() {
+		return prod_nome;
+	}
+	public void setProd_nome(String prod_nome) {
+		this.prod_nome = prod_nome;
+	}
+	public String getVend_cpf() {
+		return vend_cpf;
+	}
+	public void setVend_cpf(String vend_cpf) {
+		this.vend_cpf = vend_cpf;
+	}
+	public int getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(int cat_id) {
+		this.cat_id = cat_id;
 	}
 	
-	public Produtos() {
-		
-	}
 
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-	
-	public long getId() {
-		return id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public Categorias getCategory() {
-		return categoria;
-	}
-	
-	public void setCategory(Categorias categoria) {
-		this.categoria = categoria;
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produtos other = (Produtos) obj;
-		return id == other.id;
-	}
-
-	public Categorias getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categorias categoria) {
-		this.categoria = categoria;
-	}
 }

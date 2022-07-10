@@ -2,9 +2,15 @@ package com.gustavo.n3_poo.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
+
+@javax.persistence.Entity
+@javax.persistence.Table(name = "status")
 public class Status implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
 	private String status;
 	private String status_desc;
 	

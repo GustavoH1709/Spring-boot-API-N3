@@ -2,6 +2,10 @@ package com.gustavo.n3_poo.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Id;
+
+@javax.persistence.Entity
+@javax.persistence.Table(name = "vendedores")
 public class Vendedores implements Serializable {
 
 	/**
@@ -9,6 +13,7 @@ public class Vendedores implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private String vend_cpf;
 	private String telefone;
 	private String nome;

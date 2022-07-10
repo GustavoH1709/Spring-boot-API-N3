@@ -9,24 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gustavo.n3_poo.Repositories.ProdutosRepository;
-import com.gustavo.n3_poo.entities.Produtos;
+import com.gustavo.n3_poo.Repositories.StatusRepository;
+import com.gustavo.n3_poo.entities.Status;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutosResource {
+@RequestMapping(value = "/status")
+public class StatusResource {
+	
 	@Autowired
-	private ProdutosRepository produtosRepository;
+	private StatusRepository statusRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Produtos>> findAll() {
-		var result = produtosRepository.findAll();
+	public ResponseEntity<List<Status>> findAll() {
+		var result = statusRepository.findAll();
 		return ResponseEntity.ok().body(result);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produtos> findById(@PathVariable int id) {
-		var result = produtosRepository.findById(id);
+	public ResponseEntity<Status> findById(@PathVariable String id) {	
+	    var result = statusRepository.findById(id);
 		return ResponseEntity.ok().body(result);
 	}
 }

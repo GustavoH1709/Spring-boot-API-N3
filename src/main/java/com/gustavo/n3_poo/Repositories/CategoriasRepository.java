@@ -44,10 +44,12 @@ public class CategoriasRepository {
 		if(entity.getName().equals("") || entity.getName().equals(null))
 			throw new Exception();
 		
-		em.createNativeQuery(
+		/*em.createNativeQuery(
 				String.format("insert into categorias (cat_nome) values ('%s');", 
 				entity.getName()
-				), Categorias.class);
+				), Categorias.class);*/
+		
+		em.persist(entity);
 		
 		em.getTransaction().commit();
 	}

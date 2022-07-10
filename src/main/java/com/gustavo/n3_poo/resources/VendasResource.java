@@ -9,24 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gustavo.n3_poo.Repositories.ProdutosRepository;
-import com.gustavo.n3_poo.entities.Produtos;
+import com.gustavo.n3_poo.Repositories.StatusRepository;
+import com.gustavo.n3_poo.Repositories.VendasRepository;
+import com.gustavo.n3_poo.entities.Status;
+import com.gustavo.n3_poo.entities.Vendas;
 
 @RestController
-@RequestMapping(value = "/produtos")
-public class ProdutosResource {
+@RequestMapping(value = "/vendas")
+public class VendasResource {
 	@Autowired
-	private ProdutosRepository produtosRepository;
+	private VendasRepository vendasRepository;
 	
 	@GetMapping
-	public ResponseEntity<List<Produtos>> findAll() {
-		var result = produtosRepository.findAll();
+	public ResponseEntity<List<Vendas>> findAll() {
+		var result = vendasRepository.findAll();
 		return ResponseEntity.ok().body(result);
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Produtos> findById(@PathVariable int id) {
-		var result = produtosRepository.findById(id);
+	public ResponseEntity<Vendas> findById(@PathVariable int id) {	
+	    var result = vendasRepository.findById(id);
 		return ResponseEntity.ok().body(result);
 	}
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gustavo.n3_poo.Repositories.CategoriasRepository;
 import com.gustavo.n3_poo.entities.Categorias;
-import com.gustavo.n3_poo.entities.Clientes;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -39,7 +38,8 @@ public class CategoriasResource {
 		String result;
 		
 		try
-		{		
+		{	
+			System.out.println(entity.getName());
 			categoriaRepository.Add(entity);
 			result = "Registro Adicionado Com Sucesso";
 		} 

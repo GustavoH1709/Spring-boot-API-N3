@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import org.springframework.stereotype.Component;
 
 import com.gustavo.n3_poo.entities.Produtos;
+import com.gustavo.n3_poo.entities.Status;
 import com.gustavo.n3_poo.entities.Vendas;
 import com.gustavo.n3_poo.entities.Vendedores;
 
@@ -38,6 +39,17 @@ public class VendedoresRepository {
 	public void Add(Vendedores entity) {
 		em.getTransaction().begin();
 		em.persist(entity);
+		em.getTransaction().commit();
+	}
+	
+	public void Update(Vendedores entity) throws Exception {
+		em.getTransaction().begin();
+		
+		var get = em.find(Vendedores.class, entity.getVend_cpf());
+		
+		if(get != null)
+			em.merge(entity);
+		
 		em.getTransaction().commit();
 	}
 	

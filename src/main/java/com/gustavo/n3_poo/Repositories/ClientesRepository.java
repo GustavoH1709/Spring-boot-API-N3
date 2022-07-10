@@ -53,10 +53,10 @@ public class ClientesRepository {
 	public void Update(Clientes entity) throws Exception {
 		em.getTransaction().begin();
 		
-		if(entity.getCli_cpf().equals("") || entity.getCli_cpf().equals(null))
-			throw new Exception();
+		var get = em.find(Clientes.class, entity.getCli_cpf());
 		
-		em.merge(entity);
+		if(get != null)
+			em.merge(entity);
 		
 		em.getTransaction().commit();
 	}

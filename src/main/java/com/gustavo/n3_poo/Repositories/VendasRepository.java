@@ -47,6 +47,17 @@ public class VendasRepository {
 		em.getTransaction().commit();
 	}
 	
+	public void Update(Vendas entity) throws Exception {
+		em.getTransaction().begin();
+		
+		var get = em.find(Vendas.class, entity.getVenda_id());
+		
+		if(get != null)
+			em.merge(entity);
+		
+		em.getTransaction().commit();
+	}
+	
 	public void Delete(int venda_id) {
 		em.getTransaction().begin();
 		var get = em.find(Vendas.class, venda_id);

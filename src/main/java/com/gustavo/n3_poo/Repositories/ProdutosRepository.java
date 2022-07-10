@@ -49,6 +49,17 @@ public class ProdutosRepository {
 		em.getTransaction().commit();
 	}
 	
+	public void Update(Produtos entity) {
+		em.getTransaction().begin();
+		
+		var get = em.find(Produtos.class, entity.getProd_id());
+			
+		if(get != null)
+			em.merge(entity);
+		
+		em.getTransaction().commit();
+	}
+	
 	public void Delete(int prod_id) {
 		em.getTransaction().begin();
 		var get = em.find(Produtos.class, prod_id);

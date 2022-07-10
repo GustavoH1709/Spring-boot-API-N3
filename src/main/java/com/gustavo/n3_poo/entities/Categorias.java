@@ -24,7 +24,7 @@ public class Categorias implements Serializable {
 		
 	}
 
-	public long getId() {
+	public int getId() {
 		return cat_id;
 	}
 

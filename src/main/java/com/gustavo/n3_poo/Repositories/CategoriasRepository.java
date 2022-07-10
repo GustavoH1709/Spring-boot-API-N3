@@ -49,6 +49,17 @@ public class CategoriasRepository {
 		em.getTransaction().commit();
 	}
 	
+	public void Update(Categorias entity) {
+		em.getTransaction().begin();
+		
+		var get = em.find(Categorias.class, entity.getId());
+		
+		if(get != null)
+			em.persist(entity);
+		
+		em.getTransaction().commit();
+	}
+	
 	public void Delete(int cat_id) {
 		em.getTransaction().begin();
 		var get = em.find(Categorias.class, cat_id);

@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Component;
 
+import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
 import com.gustavo.n3_poo.entities.Status;
 
@@ -37,6 +38,17 @@ public class StatusRepository {
 	public void Add(Status entity) {
 		em.getTransaction().begin();
 		em.persist(entity);
+		em.getTransaction().commit();
+	}
+	
+	public void Update(Status entity) throws Exception {
+		em.getTransaction().begin();
+		
+		var get = em.find(Status.class, entity.getStatus());
+		
+		if(get != null)
+			em.merge(entity);
+		
 		em.getTransaction().commit();
 	}
 	

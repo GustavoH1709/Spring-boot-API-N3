@@ -10,6 +10,7 @@ public class Vendedores implements Serializable {
 
 	/**
 	 * 
+	 * a
 	 */
 	private static final long serialVersionUID = 1L;
 	

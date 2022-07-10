@@ -9,7 +9,9 @@ import javax.persistence.Persistence;
 import org.springframework.stereotype.Component;
 
 import com.gustavo.n3_poo.entities.Produtos;
+import com.gustavo.n3_poo.entities.Status;
 import com.gustavo.n3_poo.entities.Vendas;
+import com.gustavo.n3_poo.entities.Vendedores;
 
 @Component
 public class VendasRepository {
@@ -20,7 +22,7 @@ public class VendasRepository {
 	public Vendas findById(int venda_id) {
 		
 		em.getTransaction().begin();
-		Vendas get = (Vendas) em.createNativeQuery(String.format("select * from vendas where venda_id = '%d' limit 1", venda_id), Vendas.class).getResultList().stream().findFirst().orElse(null);	
+		Vendas get = em.find(Vendas.class, venda_id);	
 		em.getTransaction().commit();
 		
 		return get;
@@ -37,5 +39,18 @@ public class VendasRepository {
 		
 
 		return get;
+	}
+	
+	public void Add(Vendas entity) {
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+	}
+	
+	public void Delete(int venda_id) {
+		em.getTransaction().begin();
+		var get = em.find(Vendas.class, venda_id);
+		em.remove(get);
+		em.getTransaction().commit();
 	}
 }

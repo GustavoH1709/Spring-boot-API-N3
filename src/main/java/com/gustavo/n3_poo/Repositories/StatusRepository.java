@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Component;
 
+import com.gustavo.n3_poo.entities.Produtos;
 import com.gustavo.n3_poo.entities.Status;
 
 @Component
@@ -17,7 +18,7 @@ public class StatusRepository {
 	
 	public Status findById(String status) {
 		em.getTransaction().begin();
-		Status get = (Status) em.createNativeQuery(String.format("select * from status where status = '%s' limit 1", status), Status.class).getResultList().stream().findFirst().orElse(null);	
+		Status get = em.find(Status.class, status);	
 		em.getTransaction().commit();
 		
 		return get;
@@ -31,5 +32,19 @@ public class StatusRepository {
 		em.getTransaction().commit();
 		
 		return get;
+	}
+	
+	public void Add(Status entity) {
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+	}
+	
+	public void Delete(String status) {
+		em.getTransaction().begin();
+		var get = em.find(Status.class, status);
+		if(get != null)
+			em.remove(get);
+		em.getTransaction().commit();
 	}
 }

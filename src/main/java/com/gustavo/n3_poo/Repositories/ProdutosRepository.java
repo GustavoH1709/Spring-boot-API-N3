@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Component;
 
+import com.gustavo.n3_poo.entities.Categorias;
 import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
 
@@ -23,7 +24,7 @@ public class ProdutosRepository {
 	public Produtos findById(int prod_id) {
 		
 		em.getTransaction().begin();
-		Produtos get = (Produtos) em.createNativeQuery(String.format("select * from produtos where prod_id = '%d' limit 1", prod_id), Produtos.class).getResultList().stream().findFirst().orElse(null);	
+		Produtos get = em.find(Produtos.class, prod_id);	
 		em.getTransaction().commit();
 		
 		return get;
@@ -40,6 +41,20 @@ public class ProdutosRepository {
 		
 
 		return get;
+	}
+	
+	public void Add(Produtos entity) {
+		em.getTransaction().begin();
+		em.persist(entity);
+		em.getTransaction().commit();
+	}
+	
+	public void Delete(int prod_id) {
+		em.getTransaction().begin();
+		var get = em.find(Produtos.class, prod_id);
+		if(get != null)
+			em.remove(get);
+		em.getTransaction().commit();
 	}
 	
 }

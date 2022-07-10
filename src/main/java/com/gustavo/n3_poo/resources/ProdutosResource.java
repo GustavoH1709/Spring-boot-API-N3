@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,6 +28,23 @@ public class ProdutosResource {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Produtos> findById(@PathVariable int id) {
 		var result = produtosRepository.findById(id);
+		return ResponseEntity.ok().body(result);
+	}
+	
+	@PostMapping
+	public ResponseEntity<String> Add(@PathVariable Produtos entity) {
+		String result; 
+		
+		try 
+		{
+			produtosRepository.Add(entity);
+			result = "Registro Adicionado Com Sucesso";
+		} 
+		catch (Exception e) 
+		{
+			result = "Falha ao Adicionar Registro";
+		}
+		
 		return ResponseEntity.ok().body(result);
 	}
 }

@@ -71,9 +71,10 @@ public class ClientesResource {
 		return ResponseEntity.ok().body(result);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<String> Delete(@PathVariable String id){
 		String result;
+		
 		
 		try
 		{		
@@ -82,7 +83,7 @@ public class ClientesResource {
 		} 
 		catch (Exception e)
 		{
-			result = "Falha ao Deletar Registro";
+			result = "Falha ao Deletar Registro\n"+e.getMessage();
 		}
 		
 		return ResponseEntity.ok().body(result);

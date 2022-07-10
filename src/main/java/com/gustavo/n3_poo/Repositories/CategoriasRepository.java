@@ -22,7 +22,7 @@ public class CategoriasRepository {
 
 	public Categorias findById(int cat_id) {
 		em.getTransaction().begin();
-		Categorias get = (Categorias) em.createNativeQuery(String.format("select * from categorias where cat_id = %d limit 1", cat_id), Clientes.class).getResultList().stream().findFirst().orElse(null);	
+		Categorias get = em.find(Categorias.class, cat_id);
 		em.getTransaction().commit();
 		
 		return get;
@@ -44,13 +44,16 @@ public class CategoriasRepository {
 		if(entity.getName().equals("") || entity.getName().equals(null))
 			throw new Exception();
 		
-		/*em.createNativeQuery(
-				String.format("insert into categorias (cat_nome) values ('%s');", 
-				entity.getName()
-				), Categorias.class);*/
-		
 		em.persist(entity);
 		
+		em.getTransaction().commit();
+	}
+	
+	public void Delete(int cat_id) {
+		em.getTransaction().begin();
+		var get = em.find(Categorias.class, cat_id);
+		if(get != null)
+			em.remove(get);
 		em.getTransaction().commit();
 	}
 }

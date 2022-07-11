@@ -41,7 +41,7 @@ public class CategoriasRepository {
 	public void Add(Categorias entity) throws Exception {
 		em.getTransaction().begin();
 		
-		if(entity.getName().equals("") || entity.getName().equals(null))
+		if(entity.getCat_nome().equals("") || entity.getCat_nome().equals(null))
 			throw new Exception();
 		
 		em.persist(entity);
@@ -52,10 +52,10 @@ public class CategoriasRepository {
 	public void Update(Categorias entity) {
 		em.getTransaction().begin();
 		
-		var get = em.find(Categorias.class, entity.getId());
+		var get = em.find(Categorias.class, entity.getCat_id());
 		
 		if(get != null)
-			em.persist(entity);
+			em.merge(entity);
 		
 		em.getTransaction().commit();
 	}

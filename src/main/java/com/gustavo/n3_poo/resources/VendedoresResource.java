@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class VendedoresResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> Add(@PathVariable Vendedores entity) {
+	public ResponseEntity<String> Add(@RequestBody Vendedores entity) {
 		String result; 
 		
 		try 
@@ -52,17 +53,17 @@ public class VendedoresResource {
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> Update(@PathVariable Vendedores entity) {
+	public ResponseEntity<String> Update(@RequestBody Vendedores entity) {
 		String result; 
 		
 		try 
 		{
 			vendedoresRepository.Update(entity);
-			result = "Registro Adicionado Com Sucesso";
+			result = "Registro Atualizado Com Sucesso";
 		} 
 		catch (Exception e) 
 		{
-			result = "Falha ao Adicionar Registro";
+			result = "Falha ao Atualizar Registro";
 		}
 		
 		return ResponseEntity.ok().body(result);

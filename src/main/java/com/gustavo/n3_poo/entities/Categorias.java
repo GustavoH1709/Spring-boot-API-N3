@@ -17,49 +17,33 @@ public class Categorias implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cat_id;
-	@Column(name = "cat_nome")
 	private String cat_nome;
 	
 	public Categorias() {
 		
 	}
+	
+	public Categorias(int cat_id, String cat_nome) {
+		super();
+		this.cat_id = cat_id;
+		this.setCat_nome(cat_nome);
+	}
 
-	public int getId() {
+	
+
+	public int getCat_id() {
 		return cat_id;
 	}
 
-	public void setId(int cat_id) {
+	public void setCat_id(int cat_id) {
 		this.cat_id = cat_id;
 	}
 
-	public String getName() {
+	public String getCat_nome() {
 		return cat_nome;
 	}
 
-	public void setName(String name) {
-		this.cat_nome = name;
-	}
-
-	public Categorias(int cat_id, String name) {
-		super();
-		this.cat_id = cat_id;
-		this.cat_nome = name;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cat_id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Categorias other = (Categorias) obj;
-		return cat_id == other.cat_id;
+	public void setCat_nome(String cat_nome) {
+		this.cat_nome = cat_nome;
 	}
 }

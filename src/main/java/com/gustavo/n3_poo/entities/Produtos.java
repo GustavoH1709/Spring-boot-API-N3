@@ -18,6 +18,7 @@ public class Produtos implements Serializable {
 	private String prod_nome;
 	private String vend_cpf;
 	private int cat_id;
+	private float valor;
 	
 	public int getProd_id() {
 		return prod_id;
@@ -42,6 +43,14 @@ public class Produtos implements Serializable {
 	}
 	public void setCat_id(int cat_id) {
 		this.cat_id = cat_id;
+	}
+	
+	public float getValor() {
+		return valor;
+	}
+	
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
 	
 

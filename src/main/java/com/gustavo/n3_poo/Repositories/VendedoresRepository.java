@@ -30,7 +30,7 @@ public class VendedoresRepository {
 		List<Vendedores> get;
 
 		em.getTransaction().begin();
-		get = (List<Vendedores>) em.createNativeQuery("select * from vendedores", Produtos.class).getResultList();
+		get = (List<Vendedores>) em.createNativeQuery("select * from vendedores", Vendedores.class).getResultList();
 		em.getTransaction().commit();
 		
 		return get;

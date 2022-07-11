@@ -42,7 +42,7 @@ public class CategoriasResource {
 		
 		try
 		{	
-			System.out.println(entity.getName());
+			System.out.println(entity.getCat_nome());
 			categoriaRepository.Add(entity);
 			result = "Registro Adicionado Com Sucesso";
 		} 
@@ -58,8 +58,9 @@ public class CategoriasResource {
 	public ResponseEntity<String> Update(@RequestBody Categorias entity) {
 		String result;
 		
+		
 		try
-		{		
+		{				
 			categoriaRepository.Update(entity);
 			result = "Registro Atualizado Com Sucesso";
 		} 

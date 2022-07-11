@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,7 +37,7 @@ public class VendasResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> Add(@PathVariable Vendas entity) {
+	public ResponseEntity<String> Add(@RequestBody  Vendas entity) {
 		String result; 
 		
 		try 
@@ -53,7 +54,7 @@ public class VendasResource {
 	}
 	
 	@PutMapping
-	public ResponseEntity<String> Update(@PathVariable Vendas entity) {
+	public ResponseEntity<String> Update(@RequestBody  Vendas entity) {
 		String result; 
 		
 		try 

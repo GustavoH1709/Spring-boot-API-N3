@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.springframework.stereotype.Component;
 
+import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
 import com.gustavo.n3_poo.entities.Status;
 import com.gustavo.n3_poo.entities.Vendas;
@@ -41,9 +42,21 @@ public class VendasRepository {
 		return get;
 	}
 	
-	public void Add(Vendas entity) {
+	public void Add(Vendas entity) throws Exception {
 		em.getTransaction().begin();
-		em.persist(entity);
+		
+		var produto = em.find(Produtos.class, entity.getProd_id());
+		var cliente = em.find(Clientes.class, entity.getCli_cpf());
+		var status = em.find(Status.class, entity.getStatus());
+		
+		if(produto != null && cliente != null && status != null)
+			em.persist(entity);
+		else
+		{
+			em.getTransaction().commit();
+			throw new Exception();
+		}
+		
 		em.getTransaction().commit();
 	}
 	
@@ -52,8 +65,18 @@ public class VendasRepository {
 		
 		var get = em.find(Vendas.class, entity.getVenda_id());
 		
+		var produto = em.find(Produtos.class, entity.getProd_id());
+		var cliente = em.find(Clientes.class, entity.getCli_cpf());
+		var status = em.find(Status.class, entity.getStatus());
+		
 		if(get != null)
-			em.merge(entity);
+			if(produto != null && cliente != null && status != null)
+				em.merge(entity);
+			else 
+			{
+				em.getTransaction().commit();
+				throw new Exception();
+			}
 		
 		em.getTransaction().commit();
 	}
@@ -61,7 +84,10 @@ public class VendasRepository {
 	public void Delete(int venda_id) {
 		em.getTransaction().begin();
 		var get = em.find(Vendas.class, venda_id);
-		em.remove(get);
+		
+		if(get != null)
+			em.remove(get);
+		
 		em.getTransaction().commit();
 	}
 }

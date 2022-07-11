@@ -19,6 +19,14 @@ public class Vendas implements Serializable {
 	private int prod_id;
 	private String cli_cpf;
 	
+	public Vendas(int venda_id, String status, int prod_id, String cli_cpf) {
+		super();
+		this.venda_id = venda_id;
+		this.status = status;
+		this.prod_id = prod_id;
+		this.cli_cpf = cli_cpf;
+	}
+	
 	public int getVenda_id() {
 		return venda_id;
 	}

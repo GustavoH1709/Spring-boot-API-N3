@@ -48,7 +48,7 @@ public class ClientesResource {
 		} 
 		catch (Exception e)
 		{
-			result = "Falha ao Adicionar Registro";
+			result = "Falha ao Adicionar Registro\n"+e.getMessage();
 		}
 
 		return ResponseEntity.ok().body(result);
@@ -65,7 +65,7 @@ public class ClientesResource {
 		} 
 		catch (Exception e)
 		{
-			result = "Falha ao Atualizar Registro";
+			result = "Falha ao Atualizar Registro\n"+e.getMessage();
 		}
 		
 		return ResponseEntity.ok().body(result);

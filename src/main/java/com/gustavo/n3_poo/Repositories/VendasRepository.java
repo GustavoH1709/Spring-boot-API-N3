@@ -12,6 +12,7 @@ import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
 import com.gustavo.n3_poo.entities.Status;
 import com.gustavo.n3_poo.entities.Vendas;
+import com.gustavo.n3_poo.entities.VendasConcluidas;
 import com.gustavo.n3_poo.entities.Vendedores;
 
 @Component
@@ -50,7 +51,22 @@ public class VendasRepository {
 		var status = em.find(Status.class, entity.getStatus());
 		
 		if(produto != null && cliente != null && status != null)
-			em.persist(entity);
+		{
+			try 
+			{
+				 em.persist(entity);
+				 if(entity.getStatus().equals("F")) 
+				 {
+					 var get = (Vendas) em.createNativeQuery("select * from vendas order by venda_id desc limit 1", Vendas.class).getResultList().stream().findFirst().orElse(null);
+					 var newEntry = new VendasConcluidas(get.getVenda_id());
+					 em.persist(newEntry);
+				 }
+			}
+			catch (Exception e)
+			{
+				throw new Exception("Erro ao gravar");
+			}
+		}
 		else
 		{
 			em.getTransaction().commit();
@@ -71,7 +87,14 @@ public class VendasRepository {
 		
 		if(get != null)
 			if(produto != null && cliente != null && status != null)
-				em.merge(entity);
+				if(!get.getStatus().equals("F"))
+					em.merge(entity);
+				else 
+				{
+					var get2 = (Vendas) em.createNativeQuery("select * from vendas order by venda_id desc limit 1", Vendas.class).getResultList().stream().findFirst().orElse(null);
+					var newEntry = new VendasConcluidas(get2.getVenda_id());
+					em.persist(newEntry);
+				}
 			else 
 			{
 				em.getTransaction().commit();

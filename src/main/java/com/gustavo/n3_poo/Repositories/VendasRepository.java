@@ -54,7 +54,7 @@ public class VendasRepository {
 		else
 		{
 			em.getTransaction().commit();
-			throw new Exception();
+			throw new Exception("Erro de FK");
 		}
 		
 		em.getTransaction().commit();
@@ -75,7 +75,7 @@ public class VendasRepository {
 			else 
 			{
 				em.getTransaction().commit();
-				throw new Exception();
+				throw new Exception("Erro de FK");
 			}
 		
 		em.getTransaction().commit();

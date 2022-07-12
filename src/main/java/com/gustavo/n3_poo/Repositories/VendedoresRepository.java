@@ -56,7 +56,10 @@ public class VendedoresRepository {
 	public void Delete(String vend_cpf) {
 		em.getTransaction().begin();
 		var get = em.find(Vendedores.class, vend_cpf);
-		em.remove(get);
+		
+		if(get != null)
+			em.remove(get);
+		
 		em.getTransaction().commit();
 	}
 }

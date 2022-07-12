@@ -14,6 +14,10 @@ public class Status implements Serializable {
 	private String status;
 	private String status_desc;
 	
+	public Status() {
+		
+	}
+	
 	public Status(String status, String status_desc) {
 		super();
 		this.status = status;

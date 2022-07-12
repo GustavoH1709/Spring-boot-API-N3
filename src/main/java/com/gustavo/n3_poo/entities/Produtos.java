@@ -20,6 +20,19 @@ public class Produtos implements Serializable {
 	private int cat_id;
 	private float valor;
 	
+	public Produtos (){
+		
+	}
+	
+	public Produtos(int prod_id, String prod_nome, String vend_cpf, int cat_id, float valor) {
+		super();
+		this.prod_id = prod_id;
+		this.prod_nome = prod_nome;
+		this.vend_cpf = vend_cpf;
+		this.cat_id = cat_id;
+		this.valor = valor;
+	}
+	
 	public int getProd_id() {
 		return prod_id;
 	}

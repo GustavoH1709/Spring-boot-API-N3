@@ -19,6 +19,21 @@ public class Vendedores implements Serializable {
 	private String telefone;
 	private String nome;
 	
+	public Vendedores() {
+		
+	}
+	
+	
+	
+	public Vendedores(String vend_cpf, String telefone, String nome) {
+		super();
+		this.vend_cpf = vend_cpf;
+		this.telefone = telefone;
+		this.nome = nome;
+	}
+
+
+
 	public String getVend_cpf() {
 		return vend_cpf;
 	}

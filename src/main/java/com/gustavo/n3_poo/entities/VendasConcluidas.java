@@ -14,6 +14,20 @@ public class VendasConcluidas implements Serializable {
 	private int id_vendas_concluidas;
 	private int venda_id;
 	
+	public VendasConcluidas() {
+		
+	}
+	
+	
+	
+	public VendasConcluidas(int id_vendas_concluidas, int venda_id) {
+		super();
+		this.id_vendas_concluidas = id_vendas_concluidas;
+		this.venda_id = venda_id;
+	}
+
+
+
 	public int getId_vendas_concluidas() {
 		return id_vendas_concluidas;
 	}

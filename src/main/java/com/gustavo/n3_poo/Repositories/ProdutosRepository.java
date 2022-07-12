@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.gustavo.n3_poo.entities.Categorias;
 import com.gustavo.n3_poo.entities.Clientes;
 import com.gustavo.n3_poo.entities.Produtos;
+import com.gustavo.n3_poo.entities.Vendedores;
 
 @Component
 public class ProdutosRepository {	
@@ -43,19 +44,39 @@ public class ProdutosRepository {
 		return get;
 	}
 	
-	public void Add(Produtos entity) {
+	public void Add(Produtos entity) throws Exception {
 		em.getTransaction().begin();
-		em.persist(entity);
+		
+		var vendedor = em.find(Vendedores.class, entity.getVend_cpf());
+		var categoria = em.find(Categorias.class, entity.getCat_id());
+		
+		if(vendedor != null && categoria != null)
+			em.persist(entity);
+		else 
+		{
+			em.getTransaction().commit();
+			throw new Exception("Erro de FK");
+		}
+		
 		em.getTransaction().commit();
 	}
 	
-	public void Update(Produtos entity) {
+	public void Update(Produtos entity) throws Exception {
 		em.getTransaction().begin();
+		
+		var vendedor = em.find(Vendedores.class, entity.getVend_cpf());
+		var categoria = em.find(Categorias.class, entity.getCat_id());
 		
 		var get = em.find(Produtos.class, entity.getProd_id());
 			
 		if(get != null)
-			em.merge(entity);
+			if(vendedor != null && categoria != null)
+				em.merge(entity);
+			else 
+			{
+				em.getTransaction().commit();
+				throw new Exception("Erro de FK");
+			}
 		
 		em.getTransaction().commit();
 	}

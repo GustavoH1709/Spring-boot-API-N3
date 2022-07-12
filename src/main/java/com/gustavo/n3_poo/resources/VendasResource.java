@@ -37,7 +37,7 @@ public class VendasResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<String> Add(@RequestBody  Vendas entity) {
+	public ResponseEntity<String> Add(@RequestBody Vendas entity) {
 		String result; 
 		
 		try 

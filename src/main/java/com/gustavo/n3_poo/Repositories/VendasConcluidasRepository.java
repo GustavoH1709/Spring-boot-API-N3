@@ -28,7 +28,7 @@ public class VendasConcluidasRepository {
 		List<VendasConcluidas> get;
 
 		em.getTransaction().begin();
-		get = (List<VendasConcluidas>) em.createNativeQuery("select * from status", VendasConcluidas.class).getResultList();
+		get = (List<VendasConcluidas>) em.createNativeQuery("select * from vendasconcluidas", VendasConcluidas.class).getResultList();
 		em.getTransaction().commit();
 		
 		return get;
